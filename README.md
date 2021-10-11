@@ -25,6 +25,15 @@ x2: là tọa độ bên phải của khuôn mặt nằm trong tấm hình
 
 y2: là tọa độ bên dưới của khuôn mặt nằm trong tấm hình
 
+## Thuật toán LBP
+LBP là một toán tử có kết cấu đơn giản nhưng rất hiệu quả, nó gắn nhãn các pixel của hình ảnh bằng các ngưỡng vùng lân cận của mỗi pixel và coi kết quả là một số nhị phân.
+
+Thuật toán LBP rút trích đặc trưng hình ảnh, bằng cách so sánh giá trị của một pixel với các pixel khác bao quanh nó. 
+Để xây dựng được LBP trước tiên phải chuyển hình ảnh đầu vào về dạng grayscale, với mỗi pixel chúng ta chọn ra vùng lân cận bao quanh pixel trung tâm và mô hình có kích thước là
+3x3 pixel
+
+Đối với thuật toán sau khi huân luyện sẽ lưu vào file có đuôi .yml, bên trong file sẽ chứa các mãng hình ảnh và id. ID sẽ được đối chiếu tương ứng với từng mãng ảnh riêng được lưu bên trong file .yml. Khi predict thì mô hình sẽ dò và so sánh mãng xem ảnh tương thích với mảng nào nhất sau đó trả ra id tương ứng của hình ảnh và tỉ lệ biểu hiện độ chính xác của hình. 
+
 ## Chuẩn bị dữ liệu để huấn luyện mô hình
 Để có thể huấn luyện được mô hình ta cần một tập dữ liệu hình ảnh. Mỗi file là một ID bên trong file sẽ là hình ảnh của người cần huấn luyện, với mỗi người sẽ có 1 ID riêng.
 Cách tốt nhất cho việc chuẩn bị là nên chọn hình ảnh chỉ có một người trong ảnh tránh việc máy dò tìm loại bỏ đi ảnh khi phát hiện có 2 người trong ảnh.
@@ -32,12 +41,6 @@ Cách tốt nhất cho việc chuẩn bị là nên chọn hình ảnh chỉ có
 Sau khi có tập dữ liệu chúng ta sẽ sử dụng máy dò khuôn mặt để lấy được vị trí của khuôn mặt nằm trong tấm hình và lưu nó vào 1 mảng kèm theo ID của thư mục ảnh.
 
 ## Huấn luyện mô hình
-LBP là một toán tử có kết cấu đơn giản nhưng rất hiệu quả, nó gắn nhãn các pixel của hình ảnh bằng các ngưỡng vùng lân cận của mỗi pixel và coi kết quả là một số nhị phân.
-
-Thuật toán LBP rút trích đặc trưng hình ảnh, bằng cách so sánh giá trị của một pixel với các pixel khác bao quanh nó. 
-Để xây dựng được LBP trước tiên phải chuyển hình ảnh đầu vào về dạng grayscale, với mỗi pixel chúng ta chọn ra vùng lân cận bao quanh pixel trung tâm và mô hình có kích thước là
-3x3 pixel
-
 Sau khi có 2 mảng gổm 1 mảng lưu mảng giá trị hình ảnh chứa khuôn mặt và 1 mảng lưu id của ảnh thì chúng ta bắt đầu việc huấn luyện mô hình với các bước sau:
 
 Bước 1: Khởi tạo mô hình huấn luyện với câu lệnh recognizer = cv2.face.LBPHFaceRecognizer_create()
