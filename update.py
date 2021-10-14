@@ -1,14 +1,14 @@
 import cv2
 import time
 import numpy
-from array_data import array_train
+from array_data import array_train, array_update
 from create_data import write_label
 
 def update_lbp():
     recognizer = cv2.face.LBPHFaceRecognizer_create()
     start = time.time()
-    #arrray_train('data') ghi ten file luu tru du lieu cua ban
-    faces, labels, write_label_csv = array_train('data')
+    #arrray_update('data') ghi ten file luu tru du lieu cua ban
+    faces, labels, write_label_csv = array_update('data')
     recognizer.read('training.yml')
     recognizer.update(faces, numpy.array(labels))
     recognizer.save('training.yml')
